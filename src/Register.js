@@ -4,13 +4,14 @@ import axios from 'axios';
 import './Register.css';
 
 
-const Register = () => {
+const Register = ({ onBack }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            console.log("React App Backend URL:", process.env.REACT_APP_BACKEND_URL);
             await axios.post(`${process.env.REACT_APP_BACKEND_URL}/register`, { email, password }, {
                 headers: {
                     'Access-Control-Allow-Origin': '*',
@@ -36,6 +37,7 @@ const Register = () => {
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 <br />
                 <button type="submit">Register</button>
+                <button type="button" className="back-btn" onClick={onBack}>Back</button>
             </form>
         </div>
     );

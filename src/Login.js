@@ -4,14 +4,18 @@ import axios from 'axios';
 import './Login.css';
 
 
-const Login = () => {
+const Login = ({ onBack }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, { email, password });
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, { email, password }, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                }
+            });
             console.log(response.data);
             // Handle the token and possibly store it in local storage
             alert('Login successful!');
@@ -33,6 +37,7 @@ const Login = () => {
                 <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 <br />
                 <button type="submit">Login</button>
+                <button type="button" className="back-btn" onClick={onBack}>Back</button>
             </form>
         </div>
     );

@@ -36,3 +36,242 @@
     transform: rotate(360deg);
   }
 }
+
+/* Layout & typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+.app {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f7fb;
+  color: #0f1722;
+  padding: 32px 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 720px;
+  padding: 96px 24px 24px; /* reserve space for fixed header */
+}
+
+.hero-card, .form-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 8px 30px rgba(16,24,40,0.07);
+  text-align: center;
+}
+
+/* Hero card background for homepage */
+.hero-card {
+  position: relative;
+  overflow: hidden;
+  color: #fff; /* ensure text is white on top of bg */
+  /* Using a high-quality Pexels photo (industrial/power plant) */
+  background-image: linear-gradient(180deg, rgba(2,6,23,0.46), rgba(2,6,23,0.46)), url('https://images.pexels.com/photos/9889054/pexels-photo-9889054.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  background-size: cover;
+  background-position: center center;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* subtle overlay to improve readability */
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(3,7,18,0.35), rgba(3,7,18,0.55));
+  pointer-events: none;
+}
+
+.hero-card h1, .hero-card .tagline {
+  position: relative;
+  z-index: 2;
+}
+
+.tagline {
+  color: rgba(255,255,255,0.9);
+  margin-top: 8px;
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+@media (max-width: 640px) {
+  .hero-card { background-position: 40% 20%; min-height: 260px; }
+  .site-logo { max-width: 120px; }
+}
+
+/* logo */
+.site-logo-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.site-logo-btn:focus {
+  outline: 2px solid rgba(0,86,179,0.15);
+  border-radius: 8px;
+}
+
+.site-logo {
+  max-width: 140px; /* smaller for header */
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+/* Header (fixed) */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 20px;
+  z-index: 60;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 12px rgba(2,6,23,0.06);
+}
+
+.brand { display:flex; align-items:center; gap:12px; }
+
+.header-actions { display:flex; gap:8px; align-items:center; }
+
+.site-header .auth-btn {
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+@media (max-width: 640px) {
+  .site-header {
+    padding: 8px 12px;
+    height: 56px;
+  }
+  .container { padding-top: 72px; }
+}
+@media (max-width: 640px) {
+  .site-header {
+    position: static;
+    margin-bottom: 12px;
+    justify-content: flex-end;
+  }
+  .container { padding-top: 8px; }
+}
+
+/* Auth controls */
+.auth-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 0;
+}
+
+.auth-btn {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: #111827;
+  color: #fff;
+  font-weight: 600;
+  transition: transform .12s ease, box-shadow .12s;
+  box-shadow: 0 2px 8px rgba(2,6,23,0.06);
+}
+
+/* Footer */
+.site-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 14px 0;
+  text-align: center;
+  background: rgba(255,255,255,0.95);
+  border-top: 1px solid rgba(16,24,40,0.04);
+  box-shadow: 0 -4px 24px rgba(16,24,40,0.06);
+  z-index: 50;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+
+.footer-link {
+  background: transparent;
+  border: none;
+  color: #374151;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.footer-link:hover {
+  background: rgba(17,24,39,0.04);
+}
+
+/* ensure main content isn't hidden behind the fixed footer */
+.container { padding-bottom: 72px; }
+
+@media (max-width: 640px) {
+  .footer-nav { gap: 8px; }
+  .container { padding-bottom: 92px; }
+}
+
+.auth-btn.secondary {
+  background: transparent;
+  color: #111827;
+  border: 1px solid #e6e9ee;
+  box-shadow: none;
+}
+
+.auth-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(2,6,23,0.08);
+}
+
+.auth-btn.active {
+  background: #0b1220;
+}
+
+/* Form card */
+.form-header h2 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.auth-section {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Page wrapper */
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.footer-link.active {
+  text-decoration: underline;
+  color: #0f1722;
+}

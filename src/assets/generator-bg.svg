@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e6eefc" />
+      <stop offset="100%" stop-color="#d9e7f7" />
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cfd8e3" />
+      <stop offset="100%" stop-color="#9aa6b8" />
+    </linearGradient>
+  </defs>
+
+  <!-- subtle background shapes -->
+  <rect width="1200" height="800" fill="url(#g-bg)" />
+  <g opacity="0.06">
+    <circle cx="980" cy="120" r="160" fill="#0f1722" />
+    <circle cx="160" cy="80" r="120" fill="#0f1722" />
+  </g>
+
+  <!-- simplified generator illustration -->
+  <g transform="translate(220,240) scale(1.1)">
+    <!-- base -->
+    <rect x="40" y="180" width="760" height="120" rx="10" fill="#0b1220" opacity="0.08" />
+
+    <!-- body -->
+    <rect x="120" y="40" width="560" height="200" rx="8" fill="url(#metal)" stroke="#bfc9d7" stroke-width="2" />
+
+    <!-- vents -->
+    <g fill="#2b3440" opacity="0.65">
+      <rect x="150" y="68" width="420" height="12" rx="6" />
+      <rect x="150" y="94" width="420" height="12" rx="6" />
+      <rect x="150" y="120" width="420" height="12" rx="6" />
+    </g>
+
+    <!-- control panel -->
+    <rect x="560" y="110" width="80" height="80" rx="6" fill="#0f1722" opacity="0.8" />
+    <circle cx="596" cy="150" r="8" fill="#ffbf69" />
+    <rect x="578" y="164" width="36" height="8" rx="4" fill="#c8d2e0" />
+
+    <!-- accents -->
+    <rect x="120" y="160" width="560" height="16" rx="6" fill="#0b1220" opacity="0.06" />
+
+    <!-- fuel tank / attachment -->
+    <rect x="700" y="120" width="120" height="70" rx="6" fill="#9aa6b8" opacity="0.9" />
+    <rect x="718" y="96" width="80" height="26" rx="6" fill="#d9e7f7" opacity="0.55" />
+
+    <!-- ground shadow -->
+    <ellipse cx="500" cy="320" rx="340" ry="36" fill="#0f1722" opacity="0.06" />
+  </g>
+
+  <!-- subtle mask to keep edges soft -->
+  <rect width="1200" height="800" fill="none" />
+</svg>
