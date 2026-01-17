@@ -11,20 +11,16 @@ const Login = ({ onBack }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, { email, password }, {
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                }
-            });
-            console.log(response.data);
-            // Handle the token and possibly store it in local storage
-            alert('Login successful!');
-            // Optionally redirect to a protected page or home page
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, { email, password });
+            alert('Login successful!'); 
         } catch (error) {
             console.error(error);
             alert('Failed to login. Please check your details.');
         }
     };
+
+    // Store the token in local storage upon successful login
+    localStorage.setItem('token', response.data.token);
 
     return (
         <div className="login-container">
@@ -42,5 +38,7 @@ const Login = ({ onBack }) => {
         </div>
     );
 };
+
+
 
 export default Login;

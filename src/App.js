@@ -17,7 +17,6 @@ function App() {
     };
 
     const [page, setPage] = useState(null); // 'products' | 'clients' | 'contact' | 'areaclient' | null
-
     const openPage = (which) => {
         setPage(which);
         setVisible(null); // close auth forms when navigating

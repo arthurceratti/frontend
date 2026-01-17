@@ -33,11 +33,18 @@ const retrieveClientData = async (start, stop) => {
     if (start) params.start = start instanceof Date ? start.toISOString() : start;
     if (stop) params.stop = stop instanceof Date ? stop.toISOString() : stop;
 
+    // Get token from localStorage
+    const token = localStorage.getItem('token');
+
+    // Build headers including token for authentication
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+        'Access-Control-Allow-Origin': '*',
+    };
+
     const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/show-data`, {
       params,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      }
+      headers,
     }).then(response => {
       const responseData = response.data;
       console.log('Data fetch response:', responseData); 
