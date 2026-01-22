@@ -1,0 +1,11 @@
+spec:
+  component: [name, version]
+  inputs:
+    image_tag:
+      default: latest
+---
+
+build-job:
+  image: registry.example.com/$[[ component.name ]]:$[[ component.version ]]
+  script:
+    - echo "Building with component version $[[ component.version ]]"

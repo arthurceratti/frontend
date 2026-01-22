@@ -8,15 +8,25 @@ import Clients from './components/pages/clients';
 import AreaClient from './components/pages/areaclient';
 import Contact from './components/pages/contact';
 import logo from './assets/logo1.png';
+import Logout from './components/pages/logout';
 
 function App() {
     const [visible, setVisible] = useState(null); // 'register' | 'login' | null
+    const [page, setPage] = useState(null); // 'products' | 'clients' | 'contact' | 'areaclient' | null
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const toggleVisible = (which) => {
         setVisible(prev => (prev === which ? null : which));
     };
 
-    const [page, setPage] = useState(null); // 'products' | 'clients' | 'contact' | 'areaclient' | null
+    const checkAuthentication = () => {
+        const token = localStorage.getItem('token');
+        setIsAuthenticated(!!token);
+    };
+    
+    React.useEffect(() => {
+        checkAuthentication();
+    }, []); 
 
     const openPage = (which) => {
         setPage(which);
@@ -31,10 +41,15 @@ function App() {
                         <img src={logo} alt="Ceratti Tecnologies Solutions logo" className="site-logo" />
                     </button>
                 </div>
-                <div className="header-actions">
-                    <button className={`auth-btn ${visible === 'register' ? 'active' : ''}`} onClick={() => toggleVisible('register')} aria-label="Abrir formulário de registro">Register</button>
-                    <button className={`auth-btn secondary ${visible === 'login' ? 'active' : ''}`} onClick={() => toggleVisible('login')} aria-label="Abrir formulário de login">Login</button>
-                </div>
+               {!isAuthenticated && (
+                <>
+                    <button onClick={() => toggleVisible('register')}>Register</button>
+                    <button onClick={() => toggleVisible('login')}>Login</button>
+                </>
+                )}
+                {isAuthenticated && (
+                    <button onClick={() => setVisible('logout')}>Logout</button>
+                )}
             </header>
 
             <main className="container">
@@ -53,6 +68,8 @@ function App() {
                             <section className="auth-section">
                                 {visible === 'register' && <Register onBack={() => setVisible(null)} />}
                                 {visible === 'login' && <Login onBack={() => setVisible(null)} />}
+                                {visible === 'logout' && <Logout onBack={() => setVisible(null)} />}
+
                             </section>
                         </div>
                     )

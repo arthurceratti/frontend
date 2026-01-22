@@ -1,25 +1,28 @@
-// src/Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css';
-
 
 const Login = ({ onBack }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = async (e) => {
+        console.log('Submitting login form');
         e.preventDefault();
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, { email, password }, {
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, { email, password });
+                
+                console.log('Response type:',  response.data.data);
+                if(response.data.data === 'success'){
+                    alert('Login successful!');
+                    // Store the token in local storage upon successful login
+                    localStorage.setItem('token', response.data.token);
+                    window.location.href = '/areaclient'; // Redirect to the protected area
                 }
-            });
-            console.log(response.data);
-            // Handle the token and possibly store it in local storage
-            alert('Login successful!');
-            // Optionally redirect to a protected page or home page
+                
+          
+
+            
         } catch (error) {
             console.error(error);
             alert('Failed to login. Please check your details.');
